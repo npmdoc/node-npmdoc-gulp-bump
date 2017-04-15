@@ -1,11 +1,13 @@
 # api documentation for  [gulp-bump (v2.7.0)](http://github.com/stevelacy/gulp-bump)  [![npm package](https://img.shields.io/npm/v/npmdoc-gulp-bump.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-gulp-bump) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-gulp-bump.svg)](https://travis-ci.org/npmdoc/node-npmdoc-gulp-bump)
 #### Bump npm versions with Gulp (gulpjs.com)
 
-[![NPM](https://nodei.co/npm/gulp-bump.png?downloads=true)](https://www.npmjs.com/package/gulp-bump)
+[![NPM](https://nodei.co/npm/gulp-bump.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/gulp-bump)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-gulp-bump/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-gulp-bump_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-gulp-bump/build..beta..travis-ci.org/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-gulp-bump/build/screenCapture.buildCi.browser.apidoc.html.png)](https://npmdoc.github.io/node-npmdoc-gulp-bump/build/apidoc.html)
 
-![package-listing](https://npmdoc.github.io/node-npmdoc-gulp-bump/build/screen-capture.npmPackageListing.svg)
+![npmPackageListing](https://npmdoc.github.io/node-npmdoc-gulp-bump/build/screenCapture.npmPackageListing.svg)
+
+![npmPackageDependencyTree](https://npmdoc.github.io/node-npmdoc-gulp-bump/build/screenCapture.npmPackageDependencyTree.svg)
 
 
 
@@ -16,7 +18,6 @@
 {
     "author": {
         "name": "Steve Lacy",
-        "email": "me@slacy.me",
         "url": "http://slacy.me"
     },
     "bugs": {
@@ -59,13 +60,11 @@
     "main": "./index.js",
     "maintainers": [
         {
-            "name": "stevelacy",
-            "email": "me@slacy.me"
+            "name": "stevelacy"
         }
     ],
     "name": "gulp-bump",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git://github.com/stevelacy/gulp-bump.git"
@@ -82,10 +81,66 @@
 # <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
 
 #### [module gulp-bump](#apidoc.module.gulp-bump)
+1.  [function <span class="apidocSignatureSpan"></span>gulp-bump (opts)](#apidoc.element.gulp-bump.gulp-bump)
+1.  [function <span class="apidocSignatureSpan">gulp-bump.</span>toString ()](#apidoc.element.gulp-bump.toString)
 
 
 
 # <a name="apidoc.module.gulp-bump"></a>[module gulp-bump](#apidoc.module.gulp-bump)
+
+#### <a name="apidoc.element.gulp-bump.gulp-bump"></a>[function <span class="apidocSignatureSpan"></span>gulp-bump (opts)](#apidoc.element.gulp-bump.gulp-bump)
+- description and source-code
+```javascript
+gulp-bump = function (opts) {
+
+  opts = opts || {};
+  if (!opts.type || !semver.inc('0.0.1', opts.type)) {
+    opts.type = 'patch';
+  }
+
+  return through.obj(function(file, enc, cb) {
+
+    if (file.isNull()) {
+      return cb(null, file);
+    }
+    if (file.isStream()) {
+      return cb(new pluginError(PLUGIN_NAME, 'Streaming not supported'));
+    }
+
+    opts.str = String(file.contents);
+    bump(opts, function(err, res) {
+      if (err) {
+        return cb(new pluginError(PLUGIN_NAME, err));
+      }
+      file.contents = new Buffer(res.str);
+
+      if (!opts.quiet) {
+      log('Bumped', log.colors.cyan(res.prev),
+        'to', log.colors.magenta(res.new),
+        'with type:', log.colors.cyan(res.type));
+      }
+      file.bumpData = res;
+      cb(null, file);
+    });
+  });
+}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.gulp-bump.toString"></a>[function <span class="apidocSignatureSpan">gulp-bump.</span>toString ()](#apidoc.element.gulp-bump.toString)
+- description and source-code
+```javascript
+toString = function () {
+    return toString;
+}
+```
+- example usage
+```shell
+n/a
+```
 
 
 
