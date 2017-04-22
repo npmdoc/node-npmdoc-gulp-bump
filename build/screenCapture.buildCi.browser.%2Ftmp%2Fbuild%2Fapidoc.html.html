@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="http://github.com/stevelacy/gulp-bump"
-
-    >gulp-bump (v2.7.0)</a>
+    <a href="http://github.com/stevelacy/gulp-bump">gulp-bump (v2.7.0)</a>
 </h1>
 <h4>Bump npm versions with Gulp (gulpjs.com)</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.gulp-bump">module gulp-bump</a><ol>
 
@@ -88,8 +81,8 @@
     <li>description and source-code<pre class="apidocCodePre">gulp-bump = function (opts) {
 
   opts = opts || {};
-  if (!opts.type || !semver.inc(&#x27;0.0.1&#x27;, opts.type)) {
-    opts.type = &#x27;patch&#x27;;
+  if (!opts.type || !semver.inc('0.0.1', opts.type)) {
+    opts.type = 'patch';
   }
 
   return through.obj(function(file, enc, cb) {
@@ -98,7 +91,7 @@
       return cb(null, file);
     }
     if (file.isStream()) {
-      return cb(new pluginError(PLUGIN_NAME, &#x27;Streaming not supported&#x27;));
+      return cb(new pluginError(PLUGIN_NAME, 'Streaming not supported'));
     }
 
     opts.str = String(file.contents);
@@ -109,9 +102,9 @@
       file.contents = new Buffer(res.str);
 
       if (!opts.quiet) {
-      log(&#x27;Bumped&#x27;, log.colors.cyan(res.prev),
-        &#x27;to&#x27;, log.colors.magenta(res.new),
-        &#x27;with type:&#x27;, log.colors.cyan(res.type));
+      log('Bumped', log.colors.cyan(res.prev),
+        'to', log.colors.magenta(res.new),
+        'with type:', log.colors.cyan(res.type));
       }
       file.bumpData = res;
       cb(null, file);
@@ -130,3 +123,4 @@
     ]
 </div>
 </div>
+</body></html>
